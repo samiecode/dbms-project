@@ -11,6 +11,7 @@ public class Driver {
     private double rating;
 
     public Driver() {
+        this.driverId = KeyGenerator.generateKey();
     }
 
     public Driver(String firstName, String lastName, long phoneNumber, long numberOfUsersRated, double rating) {

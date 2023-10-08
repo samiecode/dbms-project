@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
-
+import java.util.List;
 import java.util.HashMap;
 
 @Component
@@ -40,6 +40,7 @@ public class UserJdbcDao {
     }
 
     public void createUser(User user) {
+        if (user.getUserId()==0) user.setUserId(0);// sets it to a random val.
         String sql = "INSERT INTO Users (UserId, FirstName, LastName, PhoneNumber, Email, UserPassword) VALUES (:UserId,:FirstName, :LastName, :PhoneNumber, :Email, :UserPassword)";
         HashMap<String, Object> params = getUserMap(user);
         namedParameterJdbcTemplate.update(sql, params);
@@ -50,5 +51,10 @@ public class UserJdbcDao {
         HashMap<String, Object> params = new HashMap<>();
         params.put("UserId", id);
         return namedParameterJdbcTemplate.queryForObject(sql, params, userRowMapper);
+    }
+
+    public List<User> getAllUsers() {
+        String sql = "SELECT * FROM Users";
+        return namedParameterJdbcTemplate.query(sql, userRowMapper);
     }
 }

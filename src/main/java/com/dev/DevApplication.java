@@ -13,7 +13,7 @@ import com.dev.dao.ItemJdbcDao;
 public class DevApplication {
 
     public static void main(String[] args) {
-
+        // for testing purposes
         var context = SpringApplication.run(DevApplication.class, args);
         UserJdbcDao userJdbcDao = context.getBean(UserJdbcDao.class);
         User rohith = new User("Rohith", "Peddi", 1234567890, "dev@rohith.pro","password");
@@ -25,7 +25,7 @@ public class DevApplication {
         restaurantJdbcDao.createRestaurant(r);
         Restaurant insertedRestaurant = restaurantJdbcDao.getRestaurantById(r.getRestaurantId());
         System.out.println(insertedRestaurant);
-        Item i = new Item("Veg biryani", r.getRestaurantId(), true, 200, "Veg biryani is the best biryani in the world!", true, 4.5, 10);
+        Item i = new Item("Veg Biryani", r.getRestaurantId(), true, 200, "Veg biryani is the best biryani in the world!", true, 4.5, 10);
         ItemJdbcDao itemJdbcDao = context.getBean(ItemJdbcDao.class);
         itemJdbcDao.createItem(i);
         Item insertedItem = itemJdbcDao.getItemById(i.getItemId());

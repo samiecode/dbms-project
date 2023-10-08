@@ -86,7 +86,7 @@ public class Item {
     }
 
     public Item() {
-
+        this.itemId = KeyGenerator.generateKey();
     }
 
     public Item(String itemName, long restaurantId, boolean isVegeterian, double price, String itemDescription, boolean isAvailable, double rating, long numberOfUsersRated) {

@@ -14,7 +14,7 @@ public class Promocode {
     private String promoDescription;
 
     public Promocode() {
-
+        this.promocodeId = KeyGenerator.generateKey();
     }
 
     public Promocode(String promoName, Date startDate, Date endDate, double discount, double minimumOrderValue, String promoDescription) {

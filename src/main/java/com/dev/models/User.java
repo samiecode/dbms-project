@@ -11,6 +11,7 @@ public class User {
     private String userPassword;
 
     public User() {
+        setUserId(0);
     }
 
     public User(String firstName, String lastName, long phoneNumber, String email, String userPassword) {
@@ -27,7 +28,9 @@ public class User {
     }
 
     public void setUserId(long userId) {
-        this.userId = userId;
+        if (userId == 0)
+            this.userId = KeyGenerator.generateKey();
+        else this.userId = userId;
     }
 
     public String getFirstName() {

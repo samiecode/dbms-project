@@ -34,6 +34,7 @@ public class Restaurant {
     }
 
     public Restaurant() {
+        this.restaurantId = KeyGenerator.generateKey();
     }
 
     public long getRestaurantId() {
