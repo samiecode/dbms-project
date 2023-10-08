@@ -1,0 +1,5 @@
+Conventions:
+1. Using camelCase for variable names and PascalCase for class names.
+
+Possible improvements:
+1. Now for users of database to have unique ids, I am not gonna set Id during initialization. But when it is sent to db, I am then gonna set it.
