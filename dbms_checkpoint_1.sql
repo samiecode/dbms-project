@@ -8,7 +8,9 @@ create table users (
     LastName varchar(50),
     PhoneNumber bigint CHECK (PhoneNumber REGEXP '^[0-9]{10}$'),
     Email varchar(255) CHECK (Email REGEXP '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$'),
-    UserPassword varchar(100)
+    UserPassword varchar(100),
+    RoleId bigint default 2,
+    UNIQUE(email)
 );
 
 create table userAddress (
@@ -58,7 +60,8 @@ create table restaurant (
     State varchar(50),
     Pincode varchar(10),
     Rating double,
-    NumberOfUsersRated int 
+    NumberOfUsersRated int,
+    RestaurantDescription text default null
 );
 
 create table items (
@@ -115,7 +118,7 @@ create table itemCategory (
     Foreign key(ItemId) references items(ItemId)
 );
 
-INSERT INTO users
+INSERT INTO users(userid, firstname, lastname, phonenumber, email, userpassword)
 VALUES
     (1,'Amit', 'Kumar', 9876543210, 'amit.kumar@example.com', 'password123'),
     (2,'Rajesh', 'Sharma', 9876543211, 'rajesh.sharma@example.com', 'secret456'),
@@ -141,26 +144,26 @@ VALUES
 
 INSERT INTO restaurant 
 VALUES
-    (1,'The Spice Garden', '10:00:00', '22:00:00', 0, 9876543210, '45A Richmond Road', 'Bangalore', 'Karnataka', '560025', 4, 120),
-    (2,'Café Royale', '11:30:00', '23:00:00', 1, 9876543211, '22B Park Street', 'Kolkata', 'West Bengal', '700016', 4, 80),
-    (3,'Green Valley Bistro', '09:00:00', '21:30:00', 0, 9876543212, '31A Jubilee Hills', 'Hyderabad', 'Telangana', '500033', 5, 150),
-    (4,'Taste of India', '12:00:00', '22:30:00', 0, 9876543213, '14C Connaught Place', 'Delhi', 'Delhi', '110001', 3, 200),
-    (5,'Spice Junction', '10:30:00', '21:30:00', 0, 9876543214, '7E Brigade Road', 'Bangalore', 'Karnataka', '560001', 4, 100),
-    (6,'Saffron Delight', '11:00:00', '22:30:00', 0, 9876543215, '3D MG Road', 'Pune', 'Maharashtra', '411001', 4, 90),
-    (7,'Delhi Diner', '09:30:00', '20:00:00', 1, 9876543216, '8B Church Street', 'Chennai', 'Tamil Nadu', '600001', 3, 140),
-    (8,'The Royal Tandoor', '12:30:00', '23:30:00', 1, 9876543217, '19A Rajpur Road', 'Dehradun', 'Uttarakhand', '248001', 4, 75),
-    (9,'Spice Route', '10:45:00', '21:45:00', 1, 9876543218, '25A Ashoka Road', 'Jaipur', 'Rajasthan', '302001', 4, 110),
-    (10,'Mumbai Masala', '09:15:00', '20:15:00', 1, 9876543219, '17B Marine Drive', 'Mumbai', 'Maharashtra', '400001', 5, 180),
-    (11,'Tandoor Village', '11:00:00', '22:00:00', 1, 9876543220, '12E Shyambazar', 'Kolkata', 'West Bengal', '700004', 4, 95),
-    (12,'Flavors of Kochi', '09:30:00', '20:30:00', 0, 9876543221, '15C Jubilee Hills', 'Hyderabad', 'Telangana', '500033', 3, 60),
-    (13,'Gurgaon Grills', '10:15:00', '21:15:00', 0, 9876543222, '9D Connaught Place', 'Delhi', 'Delhi', '110001', 4, 130),
-    (14,'Delhi Delights', '12:00:00', '23:00:00', 0, 9876543223, '5E Brigade Road', 'Bangalore', 'Karnataka', '560001', 5, 175),
-    (15,'Hyderabadi Spice', '09:45:00', '20:45:00', 0, 9876543224, '2F MG Road', 'Pune', 'Maharashtra', '411001', 4, 105),
-    (16,'Patiala Palace', '11:30:00', '22:30:00', 0, 9876543225, '11A Cathedral Road', 'Chennai', 'Tamil Nadu', '600001', 3, 70),
-    (17,'Bhopal Bites', '10:00:00', '21:00:00', 1, 9876543226, '7C JLN Marg', 'Jaipur', 'Rajasthan', '302001', 4, 125),
-    (18,'Nagpur Spice House', '12:15:00', '23:15:00', 1, 9876543227, '14D Marine Drive', 'Mumbai', 'Maharashtra', '400001', 3, 85),
-    (19,'Coimbatore Cuisine', '09:15:00', '20:15:00', 1, 9876543228, '27B Rajpur Road', 'Dehradun', 'Uttarakhand', '248001', 4, 110),
-    (20,'Varanasi Vibe', '10:30:00', '21:30:00', 1, 9876543229, '31E City Center', 'Varanasi', 'Uttar Pradesh', '221001', 5, 155);
+    (1,'The Spice Garden', '10:00:00', '22:00:00', 0, 9876543210, '45A Richmond Road', 'Bangalore', 'Karnataka', '560025', 4, 120, 'some description'),
+    (2,'Café Royale', '11:30:00', '23:00:00', 1, 9876543211, '22B Park Street', 'Kolkata', 'West Bengal', '700016', 4, 80, 'some description'),
+    (3,'Green Valley Bistro', '09:00:00', '21:30:00', 0, 9876543212, '31A Jubilee Hills', 'Hyderabad', 'Telangana', '500033', 5, 150, 'some description'),
+    (4,'Taste of India', '12:00:00', '22:30:00', 0, 9876543213, '14C Connaught Place', 'Delhi', 'Delhi', '110001', 3, 200, 'some description'),
+    (5,'Spice Junction', '10:30:00', '21:30:00', 0, 9876543214, '7E Brigade Road', 'Bangalore', 'Karnataka', '560001', 4, 100, 'some description'),
+    (6,'Saffron Delight', '11:00:00', '22:30:00', 0, 9876543215, '3D MG Road', 'Pune', 'Maharashtra', '411001', 4, 90, 'some description'),
+    (7,'Delhi Diner', '09:30:00', '20:00:00', 1, 9876543216, '8B Church Street', 'Chennai', 'Tamil Nadu', '600001', 3, 140, 'some description'),
+    (8,'The Royal Tandoor', '12:30:00', '23:30:00', 1, 9876543217, '19A Rajpur Road', 'Dehradun', 'Uttarakhand', '248001', 4, 75, 'some description'),
+    (9,'Spice Route', '10:45:00', '21:45:00', 1, 9876543218, '25A Ashoka Road', 'Jaipur', 'Rajasthan', '302001', 4, 110, 'some description'),
+    (10,'Mumbai Masala', '09:15:00', '20:15:00', 1, 9876543219, '17B Marine Drive', 'Mumbai', 'Maharashtra', '400001', 5, 180, 'some description'),
+    (11,'Tandoor Village', '11:00:00', '22:00:00', 1, 9876543220, '12E Shyambazar', 'Kolkata', 'West Bengal', '700004', 4, 95, 'some description'),
+    (12,'Flavors of Kochi', '09:30:00', '20:30:00', 0, 9876543221, '15C Jubilee Hills', 'Hyderabad', 'Telangana', '500033', 3, 60, 'some description'),
+    (13,'Gurgaon Grills', '10:15:00', '21:15:00', 0, 9876543222, '9D Connaught Place', 'Delhi', 'Delhi', '110001', 4, 130, 'some description'),
+    (14,'Delhi Delights', '12:00:00', '23:00:00', 0, 9876543223, '5E Brigade Road', 'Bangalore', 'Karnataka', '560001', 5, 175, 'some description'),
+    (15,'Hyderabadi Spice', '09:45:00', '20:45:00', 0, 9876543224, '2F MG Road', 'Pune', 'Maharashtra', '411001', 4, 105, 'some description'),
+    (16,'Patiala Palace', '11:30:00', '22:30:00', 0, 9876543225, '11A Cathedral Road', 'Chennai', 'Tamil Nadu', '600001', 3, 70, 'some description'),
+    (17,'Bhopal Bites', '10:00:00', '21:00:00', 1, 9876543226, '7C JLN Marg', 'Jaipur', 'Rajasthan', '302001', 4, 125, 'some description'),
+    (18,'Nagpur Spice House', '12:15:00', '23:15:00', 1, 9876543227, '14D Marine Drive', 'Mumbai', 'Maharashtra', '400001', 3, 85, 'some description'),
+    (19,'Coimbatore Cuisine', '09:15:00', '20:15:00', 1, 9876543228, '27B Rajpur Road', 'Dehradun', 'Uttarakhand', '248001', 4, 110, 'some description'),
+    (20,'Varanasi Vibe', '10:30:00', '21:30:00', 1, 9876543229, '31E City Center', 'Varanasi', 'Uttar Pradesh', '221001', 5, 15, 'some description');
 
 
 
@@ -395,8 +398,29 @@ VALUES
 (19,'BACKTOSCHOOL', '2023-08-15', '2023-08-31', 30.00, 15.00, 'Back-to-school offer: 15% off on orders above $30.'),
 (20,'HOLIDAY40', '2023-12-24', '2023-12-31', 90.00, 40.00, 'Holiday season: 40% off on orders above $90.');
 
-select * FROM USERS;
+CREATE TABLE roles(
+	roleid bigint NOT NULL PRIMARY KEY,
+    rolename VARCHAR(50),
+    UNIQUE(rolename)
+);
 
+INSERT INTO roles VALUES 
+(1, "ROLE_ADMIN"), 
+(2, "ROLE_CUSTOMER"), 
+(3, "ROLE_RESTAURANT"),
+(4,"ROLE_DRIVER");
+
+ALTER TABLE users ADD FOREIGN KEY (roleId) REFERENCES roles(roleid);
+
+INSERT INTO users VALUES (100, "Admin", "", 1234567890, "admin@food.com", "dbms@123", 1);
+select * FROM USERS;
+USE dbms_test;
+SHOW TABLES;
+
+CREATE TABLE privileges(
+	id bigint primary key,
+    privilege VARCHAR(100)
+);
 
 
 
