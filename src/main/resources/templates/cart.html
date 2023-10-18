@@ -12,8 +12,8 @@
     <div class="container">
         <h1>Make a new cart</h1>
         <form action="/cart/create" th:object="${cart}" method="post">
-            <p>User Id <input type="text" th:field="*{UserId}" /></p>
-            <p>Restaurant Id <input type="text" th:field="*{RestaurantId}" /></p>
+            <p>User Id <input type="text" th:field="*{userId}" /></p>
+            <p>Restaurant Id <input type="text" th:field="*{restaurantId}" /></p>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
         </form>
     </div>

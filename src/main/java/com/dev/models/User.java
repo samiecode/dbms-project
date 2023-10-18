@@ -2,25 +2,30 @@ package com.dev.models;
 
 import com.dev.services.KeyGenerator;
 
-public class User {
+import java.util.Set;
+
+public class User{
     private long userId;
     private String firstName;
     private String lastName;
     private long phoneNumber;
     private String email;
     private String userPassword;
+    private Role role = new Role();
+    private Set<Privilege> privileges;
 
     public User() {
         setUserId(0);
     }
 
-    public User(String firstName, String lastName, long phoneNumber, String email, String userPassword) {
+    public User(String firstName, String lastName, long phoneNumber, String email, String userPassword, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.userPassword = userPassword;
         this.userId = KeyGenerator.generateKey();
+        this.role = role;
     }
 
     public long getUserId() {
@@ -82,6 +87,26 @@ public class User {
                 ", phoneNumber=" + phoneNumber +
                 ", email='" + email + '\'' +
                 ", userPassword='" + userPassword + '\'' +
+                ", role=" + role +
+                ", privileges=" + privileges +
                 '}';
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public Set<Privilege> getPrivileges() {
+
+        return privileges;
+    }
+
+    public void setPrivileges(Set<Privilege> privileges) {
+        this.privileges = privileges;
+    }
+
 }

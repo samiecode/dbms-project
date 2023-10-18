@@ -11,9 +11,9 @@
 <body>
     <div class="container" th:object="${cartItems}">
         <tr th:each="cartItem: ${cartItems}">
-            <td th:text="${cartItem.CartId}">CartId</td>
-            <td th:text="${cartItem.ItemId}">ItemId</td>
-            <td th:text="${cartItem.Quantity}">Quantity</td>
+            <td th:text="${cartItem.cartId}">CartId</td>
+            <td th:text="${cartItem.itemId}">ItemId</td>
+            <td th:text="${cartItem.quantity}">Quantity</td>
         </tr>
     </div>
 </body>

@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 // import java.util.List;
 
-@RequestMapping("/")
 @Controller
 public class UserController {
 
@@ -22,6 +21,7 @@ public class UserController {
     @ResponseBody
     public User registerUser(User user) {
         userJdbcDao.createUser(user);
+        System.out.println(user.toString());
         return user;
     }
 
@@ -42,4 +42,16 @@ public class UserController {
         model.addAttribute("user", userJdbcDao.getUserById(id));
         return "user";
     }
+
+    @GetMapping(value = {"/signin", "/login"})
+    public String login(Model model) {
+        model.addAttribute("user", new User());
+        return "login2";
+    }
+
+    @GetMapping("/login.css")
+    public String loginCss() {
+        return "login.css";
+    }
+
 }

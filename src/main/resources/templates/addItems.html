@@ -12,9 +12,9 @@
     <div class="container">
         <h1>Add items in cart</h1>
         <form action="/cart/additems" th:object="${cartItems}" method="post">
-            <p>CartId <input type="text" th:field="*{CartId}" /></p>
-            <p>ItemId <input type="text" th:field="*{ItemId}" /></p>
-            <p>Quantity <input type="text" th:field="*{Quantity}" /></p>
+            <p>CartId <input type="text" th:field="*{cartId}" /></p>
+            <p>ItemId <input type="text" th:field="*{itemId}" /></p>
+            <p>Quantity <input type="text" th:field="*{quantity}" /></p>
             <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
         </form>
     </div>

@@ -11,3 +11,7 @@ Requires urgent changes:
 1. Add DateTime for order placed and order delivered.
 2. Move addressId from order to cart
 3. Adding transaction datetime for transaction table.
+
+## Admin
+1. Username = admin@food.com
+2. Password = dbms@123
