@@ -1,12 +1,13 @@
 package com.dev.dao;
 
 import com.dev.models.Restaurant;
-import com.dev.models.User;
+// import com.dev.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 import java.util.HashMap;
+import java.util.List;
 
 @Component
 public class RestaurantJdbcDao {
@@ -31,6 +32,7 @@ public class RestaurantJdbcDao {
         restaurant.setEndTime(rs.getTime("EndTime"));
         restaurant.setRating(rs.getDouble("Rating"));
         restaurant.setNumberOfUsersRated(rs.getLong("NumberOfUsersRated"));
+        restaurant.setVegeterian(rs.getBoolean("IsVegeterian"));
         return restaurant;
     };
 
@@ -48,6 +50,7 @@ public class RestaurantJdbcDao {
         map.put("EndTime", restaurant.getEndTime());
         map.put("Rating", restaurant.getRating());
         map.put("NumberOfUsersRated", restaurant.getNumberOfUsersRated());
+        map.put("IsVegeterian", restaurant.getVegeterian());
         return map;
     }
 
@@ -62,5 +65,10 @@ public class RestaurantJdbcDao {
         HashMap<String, Object> params = new HashMap<>();
         params.put("RestaurantId", id);
         return namedParameterJdbcTemplate.queryForObject(sql, params, userRowMapper);
+    }
+
+    public List<Restaurant> getAllRestaurants() {
+        String sql = "SELECT * FROM Restaurant";
+        return namedParameterJdbcTemplate.query(sql, userRowMapper);
     }
 }

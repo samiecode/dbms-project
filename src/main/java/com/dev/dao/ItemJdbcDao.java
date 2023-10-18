@@ -1,14 +1,13 @@
 package com.dev.dao;
 
 import com.dev.models.Item;
-import com.dev.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
+import java.util.List;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 @Component
 public class ItemJdbcDao {
@@ -58,5 +57,12 @@ public class ItemJdbcDao {
         HashMap<String, Object> params = new HashMap<>();
         params.put("ItemId", id);
         return namedParameterJdbcTemplate.queryForObject(sql, params, userRowMapper);
+    }
+
+    public List<Item> getAllItemsbyRestaurantId(long id) {
+        String sql = "SELECT * FROM Items WHERE RestaurantId = :RestaurantId";
+        HashMap<String, Object> params = new HashMap<>();
+        params.put("RestaurantId", id);
+        return namedParameterJdbcTemplate.query(sql, params, userRowMapper);
     }
 }

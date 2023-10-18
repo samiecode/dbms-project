@@ -6,8 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+// import java.util.List;
 
+@RequestMapping("/")
 @Controller
 public class UserController {
 
@@ -36,4 +37,9 @@ public class UserController {
         return "users";
     }
 
+    @RequestMapping("/users/{id}")
+    public String getUserById(@PathVariable("id") long id, Model model) {
+        model.addAttribute("user", userJdbcDao.getUserById(id));
+        return "user";
+    }
 }

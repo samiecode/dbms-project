@@ -17,8 +17,9 @@ public class Restaurant {
     private double rating;
     private long numberOfUsersRated;
     private String restaurantDescription;
+    private Boolean isVegeterian;
 
-    public Restaurant(String restaurantName, Time startTime, Time endTime, long phoneNumber, String streetAddress, String city, String state, long pincode, double rating, long numberOfUsersRated, String restaurantDescription) {
+    public Restaurant(String restaurantName, Time startTime, Time endTime, long phoneNumber, String streetAddress, String city, String state, long pincode, double rating, long numberOfUsersRated, String restaurantDescription, Boolean isVegeterian) {
         this.restaurantName = restaurantName;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -31,6 +32,7 @@ public class Restaurant {
         this.numberOfUsersRated = numberOfUsersRated;
         this.restaurantDescription = restaurantDescription;
         this.restaurantId = KeyGenerator.generateKey();
+        this.isVegeterian = isVegeterian;
     }
 
     public Restaurant() {
@@ -133,6 +135,14 @@ public class Restaurant {
         this.restaurantDescription = restaurantDescription;
     }
 
+    public Boolean getVegeterian() {
+        return isVegeterian;
+    }
+
+    public void setVegeterian(Boolean vegeterian) {
+        isVegeterian = vegeterian;
+    }
+
     @Override
     public String toString() {
         return "restaurant{" +
@@ -148,6 +158,7 @@ public class Restaurant {
                 ", rating=" + rating +
                 ", numberOfUsersRated=" + numberOfUsersRated +
                 ", restaurantDescription='" + restaurantDescription + '\'' +
+                ", isVegeterian=" + isVegeterian +
                 '}';
     }
 }

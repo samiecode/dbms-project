@@ -5,18 +5,18 @@ import com.dev.services.KeyGenerator;
 public class Cart {
     private long cartId;
     private long userId;
+    private long restaurantId;
     private boolean status;
-//    private long addressId; TODO: do this after changing the db schema.
-
-
-    public Cart(long userId, boolean status) {
-        this.userId = userId;
-        this.status = status;
-        this.cartId = KeyGenerator.generateKey();
-    }
 
     public Cart() {
         this.cartId = KeyGenerator.generateKey();
+    }
+
+    public Cart(long userId, boolean status, long restaurantId) {
+        this.cartId = KeyGenerator.generateKey();
+        this.userId = userId;
+        this.status = status;
+        this.restaurantId = restaurantId;
     }
 
     public long getCartId() {
@@ -24,7 +24,9 @@ public class Cart {
     }
 
     public void setCartId(long cartId) {
-        this.cartId = cartId;
+        if(cartId==0)
+            cartId=KeyGenerator.generateKey();
+        else this.cartId = cartId;
     }
 
     public long getUserId() {
@@ -41,5 +43,23 @@ public class Cart {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public long getRestaurantId() {
+        return restaurantId;
+    }
+
+    public void setRestaurantId(long restaurantId) {
+        this.restaurantId = restaurantId;
+    }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "cartId=" + cartId + '\'' +
+                ", userId=" + userId + '\'' +
+                ", restaurantId=" + restaurantId + '\'' +
+                ", status=" + status + '\'' +
+                '}';
     }
 }
